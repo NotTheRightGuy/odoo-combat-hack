@@ -91,8 +91,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import BooksTable from "@/components/ui/BooksTable";
+import UserBooksTable from "@/components/ui/UserBooksTable";
 
-function LibrarianDashboard() {
+function UserDashboard() {
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-20 flex-col border-r bg-background sm:flex">
@@ -121,23 +123,7 @@ function LibrarianDashboard() {
               <TooltipContent side="right">Dashboard</TooltipContent>
             </Tooltip>
           </TooltipProvider>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  href="#"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:p-3 md:w-max md:h-max "
-                >
-                  <HiOutlineChartBar
-                    strokeWidth={2}
-                    className="text-slate-900 text-2xl"
-                  />
-                  <span className="sr-only">Analytics</span>
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent side="right">Analytics</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+  
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -198,16 +184,7 @@ function LibrarianDashboard() {
                   />
                   Dashboard
                 </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-foreground"
-                >
-                  <HiOutlineChartBar
-                    strokeWidth={2.5}
-                    className="text-slate-900"
-                  />
-                  Analytics
-                </Link>
+  
                 <Link href="#" className="flex items-center gap-4 px-2.5">
                   <History
                     strokeWidth={2}
@@ -267,25 +244,7 @@ function LibrarianDashboard() {
               <TabsContent value="week">
                 <Card x-chunk="dashboard-05-chunk-3">
                   <CardContent className="mt-10 overflow-y-scroll">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="w-[40%]">Name</TableHead>
-                          <TableHead className="w-[30%]">Author</TableHead>
-                          <TableHead className="w-[30%]">Genre</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell>Book Title</TableCell>
-                          <TableCell>Author Name</TableCell>
-                          <TableCell>Book Genre</TableCell>
-                          <TableCell>
-                            <HiOutlineChevronRight />
-                          </TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
+                    <UserBooksTable />
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -296,4 +255,4 @@ function LibrarianDashboard() {
     </div>
   );
 }
-export default LibrarianDashboard;
+export default UserDashboard;
