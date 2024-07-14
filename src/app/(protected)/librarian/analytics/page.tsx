@@ -66,6 +66,22 @@ import {
 import Link from "next/link";
 import { Books } from "@/types/index";
 import { Button } from "@/components/ui/button";
+import { PieChart } from '@mui/x-charts/PieChart';
+import { useDrawingArea } from '@mui/x-charts/hooks';
+import { styled } from '@mui/material/styles';
+import { colors } from '@mui/material';
+
+const data = [
+    { value: 5, label: 'A' },
+    { value: 10, label: 'B' },
+    { value: 15, label: 'C' },
+    { value: 20, label: 'D' },
+];
+
+const size = {
+    width: 400,
+    height: 200,
+};
 
 const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
 const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
@@ -194,10 +210,10 @@ export default function UserAnalytics() {
                     </TooltipProvider>
                 </nav>
             </aside>
-            <div>
+            <div className='p-5'>
                 <h1> Analytics </h1>
-                <div className='flex gap-2'>
-                    <div className='bg-white border rounded-md'>
+                <div className='flex gap-2 w-full justify-center'>
+                    <div className='bg-white border rounded-md p-4 w-1/2'>
 
                         <BarChart
                             width={500}
@@ -215,10 +231,34 @@ export default function UserAnalytics() {
                                 // data: userData.history.borrowedBooks,
                                 disableLine: true, disableTicks: true, scaleType: 'linear'
                             }]}
+                            colors={['#DBEAFE']}
+                            // change the color of the bar on click
+
+                            onItemClick={(e) => {
+                                // colors={['#3B82F6']}
+                                e.target.style.fill = '#3B82F6'
+                                setTimeout(() => {
+                                    e.target.style.fill = '#DBEAFE'
+                                }, 1000)
+                                
+                            }}
+
                             borderRadius={16}
                             disableAxisListener={true}
 
                         />
+                    </div>
+                    <div className='bg-white border rounded-md flex flex-col p-4 w-1/2'>
+                        <div>
+                            <h1 className='font-bold text-lg'>
+                                Issued Book Categories
+                            </h1>
+                            <p className='text-sm text-gray-700'>Type of books issued and diversification in distribution</p>
+                        </div>
+
+                        <PieChart series={[{ data, innerRadius: 50 }]} {...size}>
+
+                        </PieChart>
                     </div>
 
                 </div>
