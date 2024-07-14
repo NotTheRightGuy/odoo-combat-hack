@@ -5,17 +5,17 @@ export enum Role {
 }
 
 export type Books = {
-  id?: number;
-  title: string;
-  isbn: number;
-  authors: string[];
-  publishedDate: string;
-  pageCount: number;
-  description: string;
+  id?: number; 
+  title: string; 
+  isbn: number; 
+  authors: string[]; 
+  publishedDate: string; 
+  pageCount: number; 
+  description: string; 
   categories: string[];
-  thumbnail: string;
-  available: boolean;
-  quantity: number;
+  thumbnail: string; 
+  available: boolean; 
+  quantity: number; 
 };
 
 export type User = {
