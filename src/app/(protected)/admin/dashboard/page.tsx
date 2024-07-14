@@ -220,7 +220,10 @@ function AdminDashboard() {
               </nav>
             </SheetContent>
           </Sheet>
-          <div className="text-2xl font-semibold">Admin Dashboard</div>
+          <div className="text-2xl font-semibold flex justify-between w-full">
+            <p>Admin Dashboard</p>
+            <button className="text-sm font-semibold ">Add new book</button>
+          </div>
         </header>
         <main className="flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
           <div className="relative flex-1 md:grow-0 flex items-end justify-start gap-2 w-full">
