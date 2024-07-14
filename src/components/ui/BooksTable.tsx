@@ -15,7 +15,7 @@ import { redirect } from "next/navigation";
 import { Books } from "@/types/index";
 import { useRouter } from "next/navigation";
 
-function BooksTable() {
+function BooksTable({role}: {role: string}) {
   const [books, setBooks] = useState<Books[]>();
   useEffect(() => {
     fetch("/api/books/")
@@ -27,6 +27,7 @@ function BooksTable() {
       .catch((error) => console.error(error));
   }, []);
   const router = useRouter();
+  const path = role === "admin" ? "/admin/book/" : "/librarian/book/";
   return (
     <div>
       <Table className="h-[500px]">
@@ -47,7 +48,7 @@ function BooksTable() {
               key={index}
               className="h-10 overflow-hidden cursor-pointer"
               onClick={() => {
-                window.location.href = `/book/${book.isbn}`;
+                window.location.href = `${path}${book.id}`;
               }}
             >
               <TableCell className="p-2">

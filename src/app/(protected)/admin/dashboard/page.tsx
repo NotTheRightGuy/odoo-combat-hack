@@ -94,7 +94,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+<<<<<<< HEAD
 import AddBookModal from "@/components/ui/AddBookModal";
+=======
+import BooksTable from "@/components/ui/BooksTable";
+>>>>>>> fdf277172dc15e321ddc7408f0cb1afdc08d1e10
 
 function AdminDashboard() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -106,7 +110,7 @@ function AdminDashboard() {
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-20 flex-col border-r bg-background sm:flex">
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
           <Link
-            href="#"
+            href="/"
             className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base bg-white"
           >
             <Logo className="scale-105" />
@@ -284,25 +288,7 @@ function AdminDashboard() {
               <TabsContent value="week">
                 <Card x-chunk="dashboard-05-chunk-3">
                   <CardContent className="mt-10 overflow-y-scroll">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="w-[40%]">Name</TableHead>
-                          <TableHead className="w-[30%]">Author</TableHead>
-                          <TableHead className="w-[30%]">Genre</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell>Book Title</TableCell>
-                          <TableCell>Author Name</TableCell>
-                          <TableCell>Book Genre</TableCell>
-                          <TableCell>
-                            <HiOutlineChevronRight />
-                          </TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
+                    <BooksTable role="admin" />
                   </CardContent>
                 </Card>
               </TabsContent>
