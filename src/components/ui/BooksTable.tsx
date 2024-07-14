@@ -15,7 +15,7 @@ import { redirect } from "next/navigation";
 import { Books } from "@/types/index";
 import { useRouter } from "next/navigation";
 
-function BooksTable() {
+function BooksTable({role}: {role: string}) {
   const [books, setBooks] = useState<Books[]>();
   useEffect(() => {
     fetch("/api/books/")
@@ -43,7 +43,13 @@ function BooksTable() {
         </TableHeader>
         <TableBody className="overflow-y-scroll h-">
           {books?.map((book, index) => (
-            <TableRow key={index} className="h-10 overflow-hidden">
+            <TableRow
+              key={index}
+              className="h-10 overflow-hidden cursor-pointer"
+              onClick={() => {
+                window.location.href = `/book/${book.isbn}`;
+              }}
+            >
               <TableCell className="p-2">
                 <div className="overflow-hidden rounded-sm w-full h-full">
                   <Image
@@ -123,10 +129,7 @@ function BooksTable() {
                 </Badge>
               </TableCell>
               <TableCell>
-                <div
-                  className="p-2 w-fit rounded-lg hover:bg-slate-100"
-                  onClick={() => {}}
-                >
+                <div className="p-2 w-fit rounded-lg hover:bg-slate-100">
                   <ChevronRight className="text-slate-900" />
                 </div>
               </TableCell>

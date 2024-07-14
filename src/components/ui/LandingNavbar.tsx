@@ -6,13 +6,13 @@ import { useUser } from "@clerk/nextjs";
 import { SignOutButton, SignInButton } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 
-const SlideTabsExample = () => {
+export default function LandingNavbar() {
   return (
-    <div className="mt-6">
+    <div className="my-6">
       <SlideTabs />
     </div>
   );
-};
+}
 
 const SlideTabs = () => {
   const { isSignedIn, user } = useUser();
@@ -121,5 +121,3 @@ type Position = {
   width: number;
   opacity: number;
 };
-
-export default SlideTabsExample;

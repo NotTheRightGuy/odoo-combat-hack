@@ -1,156 +1,195 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import React from "react";
 import LandingNavbar from "@/components/ui/LandingNavbar";
 
-const ShuffleHero = () => {
+export default function page() {
   return (
-    <>
+    <div>
       <LandingNavbar />
-      <section className="w-full px-8 py-12 grid grid-cols-1 mt-6 md:grid-cols-2 items-center gap-8 max-w-6xl mx-auto">
-        <div>
-          <span className="block mb-4 text-xs md:text-sm text-indigo-500 font-medium">
-            Making it fun
-          </span>
-          <h3 className="text-4xl md:text-6xl font-semibold">
-            Managing Books <br /> Made Easy
-          </h3>
-          <p className="text-base md:text-lg text-slate-700 my-4 md:my-6">
-            Managing a library has never been easier. With our platform, you can
-            easily manage your books, track your reading progress, and find new
-            books to read.
-          </p>
-          <button className="bg-indigo-500 text-white font-medium py-2 px-4 rounded transition-all hover:bg-indigo-600 active:scale-95">
-            Borrow a book
-          </button>
+      <div className="relative flex flex-col items-center justify-center px-12 pb-48 pt-12 mt-10 md:pt-24">
+        <div className="mb-1.5 rounded-full bg-zinc-600">
+          <a
+            href="#"
+            target="_blank"
+            rel="nofollow"
+            className="flex origin-top-left items-center rounded-full border border-zinc-900 bg-white p-0.5 text-sm transition-transform hover:-rotate-2"
+          >
+            <span className="rounded-full bg-[#FF6154] px-2 py-0.5 font-medium text-white">
+              HEY!
+            </span>
+            <span className="ml-1.5 mr-1 inline-block">
+              We're Odoo Combat Hack
+            </span>
+            <svg
+              stroke="currentColor"
+              fill="none"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="mr-2 inline-block"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line x1={7} y1={17} x2={17} y2={7} />
+              <polyline points="7 7 17 7 17 17" />
+            </svg>
+          </a>
         </div>
-        <ShuffleGrid />
-      </section>
-    </>
-  );
-};
-
-const shuffle = (array: (typeof squareData)[0][]) => {
-  let currentIndex = array.length,
-    randomIndex;
-
-  while (currentIndex != 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
-  }
-
-  return array;
-};
-
-const squareData = [
-  {
-    id: 1,
-    src: "https://images.unsplash.com/photo-1547347298-4074fc3086f0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-  },
-  {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1510925758641-869d353cecc7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-  },
-  {
-    id: 3,
-    src: "https://images.unsplash.com/photo-1629901925121-8a141c2a42f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-  },
-  {
-    id: 4,
-    src: "https://images.unsplash.com/photo-1580238053495-b9720401fd45?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-  },
-  {
-    id: 5,
-    src: "https://images.unsplash.com/photo-1569074187119-c87815b476da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1325&q=80",
-  },
-  {
-    id: 6,
-    src: "https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-  },
-  {
-    id: 7,
-    src: "https://images.unsplash.com/photo-1599586120429-48281b6f0ece?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-  },
-  {
-    id: 8,
-    src: "https://plus.unsplash.com/premium_photo-1671436824833-91c0741e89c9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-  },
-  {
-    id: 9,
-    src: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-  },
-  {
-    id: 10,
-    src: "https://images.unsplash.com/photo-1610768764270-790fbec18178?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-  },
-  {
-    id: 11,
-    src: "https://images.unsplash.com/photo-1507034589631-9433cc6bc453?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=684&q=80",
-  },
-  {
-    id: 12,
-    src: "https://images.unsplash.com/photo-1533107862482-0e6974b06ec4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=882&q=80",
-  },
-  {
-    id: 13,
-    src: "https://images.unsplash.com/photo-1560089000-7433a4ebbd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-  },
-  {
-    id: 14,
-    src: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80",
-  },
-  {
-    id: 15,
-    src: "https://images.unsplash.com/photo-1606244864456-8bee63fce472?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=681&q=80",
-  },
-  {
-    id: 16,
-    src: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1820&q=80",
-  },
-];
-
-const generateSquares = () => {
-  return shuffle(squareData).map((sq) => (
-    <motion.div
-      key={sq.id}
-      layout
-      transition={{ duration: 1.5, type: "spring" }}
-      className="w-full h-full"
-      style={{
-        backgroundImage: `url(${sq.src})`,
-        backgroundSize: "cover",
-      }}
-    ></motion.div>
-  ));
-};
-
-const ShuffleGrid = () => {
-  const timeoutRef = useRef<any>(null);
-  const [squares, setSquares] = useState(generateSquares());
-
-  useEffect(() => {
-    shuffleSquares();
-
-    return () => clearTimeout(timeoutRef.current);
-  }, []);
-
-  const shuffleSquares = () => {
-    setSquares(generateSquares());
-
-    timeoutRef.current = setTimeout(shuffleSquares, 3000);
-  };
-
-  return (
-    <div className="grid grid-cols-4 grid-rows-4 h-[450px] gap-1">
-      {squares.map((sq) => sq)}
+        <h1 className="max-w-4xl text-center text-4xl font-black leading-[1.15] md:text-6xl md:leading-[1.15]">
+          Managing Your Library Just Got Easier
+        </h1>
+        <p className="mx-auto my-4 max-w-3xl text-center text-base leading-relaxed md:my-6 md:text-xl md:leading-relaxed">
+          We know it can be hard to manage a library, so we made it easier for
+          you. This is a library management system that helps you manage your
+          library with ease.
+        </p>
+        <button className="rounded-lg bg-indigo-600 p-3 uppercase text-white transition-colors hover:bg-indigo-700">
+          <span className="font-bold">Get started - </span> no hassle required
+        </button>
+        <div className="absolute bottom-0 left-1/2 h-36 w-[calc(100vw_-_56px)] max-w-[1100px] -translate-x-1/2 overflow-hidden rounded-t-xl bg-zinc-900 p-0.5">
+          <div className="flex items-center justify-between px-2 py-1">
+            <div className="flex items-center gap-0.5">
+              <span className="size-2 rounded-full bg-red-400" />
+              <span className="size-2 rounded-full bg-yellow-400" />
+              <span className="size-2 rounded-full bg-green-400" />
+            </div>
+            <span className="rounded bg-zinc-600 px-2 py-0.5 text-xs text-zinc-100">
+              localhost:3000
+            </span>
+            <svg
+              stroke="currentColor"
+              fill="none"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-white"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </div>
+          <div className="relative z-0 grid h-full w-full grid-cols-[100px,_1fr] overflow-hidden rounded-t-lg bg-white md:grid-cols-[150px,_1fr]">
+            <div className="h-full border-r border-zinc-300 p-2">
+              <svg
+                width={32}
+                height="auto"
+                viewBox="0 0 50 39"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-fit fill-zinc-950"
+              >
+                <path
+                  d="M16.4992 2H37.5808L22.0816 24.9729H1L16.4992 2Z"
+                  stopColor="#09090B"
+                />
+                <path
+                  d="M17.4224 27.102L11.4192 36H33.5008L49 13.0271H32.7024L23.2064 27.102H17.4224Z"
+                  stopColor="#09090B"
+                />
+              </svg>
+              <div className="mt-3 space-y-1.5">
+                <span className="flex items-center gap-1.5 text-xs text-indigo-600">
+                  <svg
+                    stroke="currentColor"
+                    fill="none"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                  </svg>
+                  <span>Messages</span>
+                </span>
+                <span className="flex items-center gap-1.5 text-xs">
+                  <svg
+                    stroke="currentColor"
+                    fill="none"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>Tasks</span>
+                </span>
+                <span className="flex items-center gap-1.5 text-xs">
+                  <svg
+                    stroke="currentColor"
+                    fill="none"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <line x1={8} y1={6} x2={21} y2={6} />
+                    <line x1={8} y1={12} x2={21} y2={12} />
+                    <line x1={8} y1={18} x2={21} y2={18} />
+                    <line x1={3} y1={6} x2="3.01" y2={6} />
+                    <line x1={3} y1={12} x2="3.01" y2={12} />
+                    <line x1={3} y1={18} x2="3.01" y2={18} />
+                  </svg>
+                  <span>Board</span>
+                </span>
+              </div>
+            </div>
+            <div className="relative z-0 p-2">
+              <div className="mb-3 flex items-center justify-between">
+                <span className="rounded bg-zinc-200 px-1.5 py-1 pr-8 text-xs text-zinc-600">
+                  Search...
+                </span>
+                <div className="flex items-center gap-1.5 text-xl">
+                  <svg
+                    stroke="currentColor"
+                    fill="none"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-indigo-600"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                  </svg>
+                  <svg
+                    stroke="currentColor"
+                    fill="none"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx={12} cy={7} r={4} />
+                  </svg>
+                </div>
+              </div>
+              <div className="h-full rounded-xl border border-dashed border-zinc-500 bg-zinc-100" />
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 top-0 z-10 bg-gradient-to-b from-white/0 to-white" />
+          </div>
+        </div>
+      </div>
     </div>
   );
-};
-
-export default ShuffleHero;
+}

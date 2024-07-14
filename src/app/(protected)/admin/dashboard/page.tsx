@@ -92,8 +92,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import BooksTable from "@/components/ui/BooksTable";
 
-function LibrarianDashboard() {
+function AdminDashboard() {
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-20 flex-col border-r bg-background sm:flex">
@@ -126,7 +127,7 @@ function LibrarianDashboard() {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="#"
+                  href="/admin/analytics"
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:p-3 md:w-max md:h-max "
                 >
                   <HiOutlineChartBar
@@ -143,7 +144,7 @@ function LibrarianDashboard() {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="#"
+                  href="/admin/userManagement"
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:p-3 md:w-max md:h-max "
                 >
                   <HiOutlineUserGroup
@@ -220,7 +221,10 @@ function LibrarianDashboard() {
               </nav>
             </SheetContent>
           </Sheet>
-          <div className="text-2xl font-semibold">Admin Dashboard</div>
+          <div className="text-2xl font-semibold flex justify-between w-full">
+            <p>Admin Dashboard</p>
+            <button className="text-sm font-semibold ">Add new book</button>
+          </div>
         </header>
         <main className="flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
           <div className="relative flex-1 md:grow-0 flex items-end justify-start gap-2 w-full">
@@ -268,25 +272,7 @@ function LibrarianDashboard() {
               <TabsContent value="week">
                 <Card x-chunk="dashboard-05-chunk-3">
                   <CardContent className="mt-10 overflow-y-scroll">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="w-[40%]">Name</TableHead>
-                          <TableHead className="w-[30%]">Author</TableHead>
-                          <TableHead className="w-[30%]">Genre</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell>Book Title</TableCell>
-                          <TableCell>Author Name</TableCell>
-                          <TableCell>Book Genre</TableCell>
-                          <TableCell>
-                            <HiOutlineChevronRight />
-                          </TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
+                    <BooksTable role="admin" />
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -297,4 +283,4 @@ function LibrarianDashboard() {
     </div>
   );
 }
-export default LibrarianDashboard;
+export default AdminDashboard;

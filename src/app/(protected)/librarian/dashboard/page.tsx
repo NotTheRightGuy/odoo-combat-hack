@@ -267,7 +267,7 @@ export default function LibrarianDashboard() {
                   className="overflow-y-scroll h-[500px]"
                 >
                   <CardContent className="mt-10 ">
-                    <BooksTable />
+                    <BooksTable role="librarian" />
                   </CardContent>
                 </Card>
               </TabsContent>
