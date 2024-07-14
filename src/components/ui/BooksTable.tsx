@@ -37,6 +37,7 @@ function BooksTable() {
             <TableHead className="hidden sm:table-cell">ISBN</TableHead>
             <TableHead className="hidden sm:table-cell">Quantity</TableHead>
             <TableHead className="hidden md:table-cell">Status</TableHead>
+            <TableHead className="hidden md:table-cell">Year</TableHead>
             <TableHead className="text-right"></TableHead>
           </TableRow>
         </TableHeader>
@@ -66,7 +67,18 @@ function BooksTable() {
                 {book.quantity}
               </TableCell>
               <TableCell className="hidden md:table-cell">
-                <Badge className={book.available ? "bg-green-100 text-green-700 hover:bg-green-100": "bg-red-100 text-red-700 hover:bg-red-100" }>{book.available ? "Available":"Not Available"}</Badge>
+                <Badge
+                  className={
+                    book.available
+                      ? "bg-green-100 text-green-700 hover:bg-green-100"
+                      : "bg-red-100 text-red-700 hover:bg-red-100"
+                  }
+                >
+                  {book.available ? "Available" : "Not Available"}
+                </Badge>
+              </TableCell>
+              <TableCell className="hidden sm:table-cell">
+                {book.publishedDate}
               </TableCell>
               <TableCell onClick={() => redirect(`/book/${book.isbn}`)}>
                 <div className="p-2 w-fit rounded-lg hover:bg-slate-100">
@@ -100,10 +112,21 @@ function BooksTable() {
                 {book.quantity}
               </TableCell>
               <TableCell className="hidden md:table-cell">
-                <Badge className={book.available ? "bg-green-100 text-green-700 hover:bg-green-100": "bg-red-100 text-red-700 hover:bg-red-100" }>{book.available ? "Available":"Not Available"}</Badge>
+                <Badge
+                  className={
+                    book.available
+                      ? "bg-green-100 text-green-700 hover:bg-green-100"
+                      : "bg-red-100 text-red-700 hover:bg-red-100"
+                  }
+                >
+                  {book.available ? "Available" : "Not Available"}
+                </Badge>
               </TableCell>
-              <TableCell >
-                <div className="p-2 w-fit rounded-lg hover:bg-slate-100">
+              <TableCell>
+                <div
+                  className="p-2 w-fit rounded-lg hover:bg-slate-100"
+                  onClick={() => {}}
+                >
                   <ChevronRight className="text-slate-900" />
                 </div>
               </TableCell>

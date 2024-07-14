@@ -12,7 +12,7 @@ const useRoleRoute = () => {
 
   useEffect(() => {
     if (isLoaded && !userId) {
-      router.push("/sign-in");
+      router.push("/auth/sign-in");
     }
   }, [isLoaded, userId, router]);
 
