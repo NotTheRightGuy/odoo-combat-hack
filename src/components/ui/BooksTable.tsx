@@ -27,6 +27,7 @@ function BooksTable({role}: {role: string}) {
       .catch((error) => console.error(error));
   }, []);
   const router = useRouter();
+  const path = role === "admin" ? "/admin/book/" : "/librarian/book/";
   return (
     <div>
       <Table className="h-[500px]">
@@ -47,7 +48,7 @@ function BooksTable({role}: {role: string}) {
               key={index}
               className="h-10 overflow-hidden cursor-pointer"
               onClick={() => {
-                window.location.href = `/book/${book.isbn}`;
+                window.location.href = `${path}${book.id}`;
               }}
             >
               <TableCell className="p-2">
