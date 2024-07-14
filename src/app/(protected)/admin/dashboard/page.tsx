@@ -1,6 +1,8 @@
+"use client";
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
+<AddBookModal ></AddBookModal>
 import {
   HiArrowRight,
   HiOutlineChartBar,
@@ -92,15 +94,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+<<<<<<< HEAD
+import AddBookModal from "@/components/ui/AddBookModal";
+=======
 import BooksTable from "@/components/ui/BooksTable";
+>>>>>>> fdf277172dc15e321ddc7408f0cb1afdc08d1e10
 
 function AdminDashboard() {
+  const [isOpen, setIsOpen] = React.useState(false);
+  function handleClick() {
+    setIsOpen(!isOpen);
+  }
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-20 flex-col border-r bg-background sm:flex">
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
           <Link
-            href="#"
+            href="/"
             className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base bg-white"
           >
             <Logo className="scale-105" />
@@ -223,8 +233,14 @@ function AdminDashboard() {
           </Sheet>
           <div className="text-2xl font-semibold flex justify-between w-full">
             <p>Admin Dashboard</p>
-            <button className="text-sm font-semibold ">Add new book</button>
+            <button
+              className="text-sm font-semibold bg-slate-900 rounded-md px-4 py-2 text-white"
+              onClick={() => handleClick()}
+            >
+              Add new book
+            </button>
           </div>
+          {isOpen && <AddBookModal/>}
         </header>
         <main className="flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
           <div className="relative flex-1 md:grow-0 flex items-end justify-start gap-2 w-full">

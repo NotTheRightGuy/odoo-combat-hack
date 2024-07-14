@@ -1,29 +1,53 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
-import { Dispatch, SetStateAction, useState } from "react";
-import { FiAlertCircle } from "react-icons/fi";
+import { useState, useEffect } from "react";
+import { FiBook, FiHash, FiPlus } from "react-icons/fi";
 
-const BookIssueModal = () => {
+const AddBookModal = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isbn, setIsbn] = useState("");
+  const [quantity, setQuantity] = useState("");
+
+  // Open the modal immediately when the component mounts
+  useEffect(() => {
+    setIsOpen(true);
+  }, []);
+
+  const handleAddBook = () => {
+    // Add your logic to handle adding the book
+    console.log("Adding book with ISBN:", isbn, "and quantity:", quantity);
+    setIsOpen(false);
+  };
+
   return (
-    <div className="px-4 py-64 bg-slate-900 grid place-content-center">
-      <button
-        onClick={() => setIsOpen(true)}
-        className="bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium px-4 py-2 rounded hover:opacity-90 transition-opacity"
-      >
-        Open Modal
-      </button>
-      <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
-    </div>
+    <SpringModal
+      isOpen={isOpen}
+      setIsOpen={setIsOpen}
+      isbn={isbn}
+      setIsbn={setIsbn}
+      quantity={quantity}
+      setQuantity={setQuantity}
+      handleAddBook={handleAddBook}
+    />
   );
 };
 
 const SpringModal = ({
   isOpen,
   setIsOpen,
+  isbn,
+  setIsbn,
+  quantity,
+  setQuantity,
+  handleAddBook,
 }: {
   isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isbn: string;
+  setIsbn: React.Dispatch<React.SetStateAction<string>>;
+  quantity: string;
+  setQuantity: React.Dispatch<React.SetStateAction<string>>;
+  handleAddBook: () => void;
 }) => {
   return (
     <AnimatePresence>
@@ -40,32 +64,68 @@ const SpringModal = ({
             animate={{ scale: 1, rotate: "0deg" }}
             exit={{ scale: 0, rotate: "0deg" }}
             onClick={(e) => e.stopPropagation()}
-            className="bg-gradient-to-br from-violet-600 to-indigo-600 text-white p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
+            className="bg-white text-slate-900 p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
           >
-            <FiAlertCircle className="text-white/10 rotate-12 text-[250px] absolute z-0 -top-24 -left-24" />
+            <FiBook className="text-slate-200 rotate-12 text-[250px] absolute z-0 -top-24 -left-24" />
             <div className="relative z-10">
-              <div className="bg-white w-16 h-16 mb-2 rounded-full text-3xl text-indigo-600 grid place-items-center mx-auto">
-                <FiAlertCircle />
+              <div className="bg-slate-200 w-16 h-16 mb-2 rounded-full text-3xl text-slate-600 grid place-items-center mx-auto">
+                <FiBook />
               </div>
               <h3 className="text-3xl font-bold text-center mb-2">
-                One more thing!
+                Add New Book
               </h3>
-              <p className="text-center mb-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
-                aperiam vitae, sapiente ducimus eveniet in velit.
-              </p>
-              <div className="flex gap-2">
+              <div className="my-4">
+                <label
+                  htmlFor="isbn"
+                  className="block text-sm font-medium text-slate-700"
+                >
+                  ISBN Number
+                </label>
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FiHash className="h-5 w-5 text-slate-400" />
+                  </div>
+                  <input
+                    type="text"
+                    name="isbn"
+                    id="isbn"
+                    className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-slate-300 rounded-md p-2"
+                    placeholder="Enter ISBN"
+                    value={isbn}
+                    onChange={(e) => setIsbn(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="my-4">
+                <label
+                  htmlFor="quantity"
+                  className="block text-sm font-medium text-slate-700"
+                >
+                  Quantity
+                </label>
+                <input
+                  type="number"
+                  name="quantity"
+                  id="quantity"
+                  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-slate-300 rounded-md p-2"
+                  placeholder="Enter quantity"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                />
+              </div>
+              <div className="flex gap-2 mt-6">
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="bg-transparent hover:bg-white/10 transition-colors text-white font-semibold w-full py-2 rounded"
+                  className="bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold w-full py-2 rounded transition-colors"
                 >
-                  Nah, go back
+                  Cancel
                 </button>
                 <button
-                  onClick={() => setIsOpen(false)}
-                  className="bg-white hover:opacity-90 transition-opacity text-indigo-600 font-semibold w-full py-2 rounded"
+                  onClick={handleAddBook}
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold w-full py-2 rounded transition-colors flex items-center justify-center"
                 >
-                  Understood!
+                  <FiPlus className="mr-2" />
+                  Add Book
                 </button>
               </div>
             </div>
@@ -76,4 +136,4 @@ const SpringModal = ({
   );
 };
 
-export default BookIssueModal;
+export default AddBookModal;
