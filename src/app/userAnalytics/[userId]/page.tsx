@@ -73,11 +73,13 @@ export default function UserAnalytics({ params }: { params: { userId: string } }
             height={300}
             series={[
                 { data: pData },
-                // { data: userData.history.dates },
-
             ]}
-            xAxis={[{ data: xLabels, scaleType: 'band', disableTicks: true, disableLine: true }]}
-            yAxis={[{ data : pData, disableLine: true, disableTicks: true, scaleType: 'linear'}]}
+            xAxis={[{ data: xLabels,
+                // data : userData.history.date 
+                scaleType: 'band', disableTicks: true, disableLine: true }]}
+            yAxis={[{ data : pData, 
+                // data: userData.history.borrowedBooks,
+                disableLine: true, disableTicks: true, scaleType: 'linear'}]}
             borderRadius={16}
             disableAxisListener={true}
 
