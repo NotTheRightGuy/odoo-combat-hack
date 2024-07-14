@@ -92,6 +92,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import BooksTable from "@/components/ui/BooksTable";
 
 function AdminDashboard() {
   return (
@@ -268,25 +269,7 @@ function AdminDashboard() {
               <TabsContent value="week">
                 <Card x-chunk="dashboard-05-chunk-3">
                   <CardContent className="mt-10 overflow-y-scroll">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="w-[40%]">Name</TableHead>
-                          <TableHead className="w-[30%]">Author</TableHead>
-                          <TableHead className="w-[30%]">Genre</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell>Book Title</TableCell>
-                          <TableCell>Author Name</TableCell>
-                          <TableCell>Book Genre</TableCell>
-                          <TableCell>
-                            <HiOutlineChevronRight />
-                          </TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
+                    <BooksTable role="admin" />
                   </CardContent>
                 </Card>
               </TabsContent>

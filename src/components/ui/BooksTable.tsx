@@ -15,7 +15,7 @@ import { redirect } from "next/navigation";
 import { Books } from "@/types/index";
 import { useRouter } from "next/navigation";
 
-function BooksTable() {
+function BooksTable({role}: {role: string}) {
   const [books, setBooks] = useState<Books[]>();
   useEffect(() => {
     fetch("/api/books/")
@@ -122,12 +122,13 @@ function BooksTable() {
                   {book.available ? "Available" : "Not Available"}
                 </Badge>
               </TableCell>
-              <TableCell>
+              <TableCell className="">
                 <div
                   className="p-2 w-fit rounded-lg hover:bg-slate-100"
-                  onClick={() => {}}
+                  onClick={() => router.push(`/${role}/book/${book.isbn}`)}
+                  role="button"
                 >
-                  <ChevronRight className="text-slate-900" />
+                  <ChevronRight className="text-slate-900"/>
                 </div>
               </TableCell>
             </TableRow>
