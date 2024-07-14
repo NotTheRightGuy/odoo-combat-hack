@@ -45,7 +45,7 @@ export default function page() {
           library with ease.
         </p>
         <button className="rounded-lg bg-indigo-600 p-3 uppercase text-white transition-colors hover:bg-indigo-700">
-          <span className="font-bold">Get started - </span> no CC required
+          <span className="font-bold">Get started - </span> no hassle required
         </button>
         <div className="absolute bottom-0 left-1/2 h-36 w-[calc(100vw_-_56px)] max-w-[1100px] -translate-x-1/2 overflow-hidden rounded-t-xl bg-zinc-900 p-0.5">
           <div className="flex items-center justify-between px-2 py-1">
