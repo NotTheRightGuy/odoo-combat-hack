@@ -28,37 +28,73 @@ import {
 import Link from "next/link";
 import { Books } from "@/types/index";
 import { Button } from "@/components/ui/button";
+import { DataGrid } from '@mui/x-data-grid';
 
-export default function BookDetails({ params }: { params: { isbn: number } }) {
+interface BookData {
+    id: number;
+    name: string;
+    email: string;
+    date_of_borrowing: string;
+    expected_return_date: string;
+    date_of_return: string;
+    late_charge: number;
+}
+
+export default function BookDetails({ params }: { params: { id: number } }) {
     const [book, setBook] = React.useState<Books>();
-    // const [crimeHistory,setCrimeHistory]=useState<any[]>([])
-    // const [temp, setTemp] = useState<any[]>([]);
 
-    const getBookHistory = (id: number) => {
-        fetch("http://localhost:3000/api/books/history/" + id)
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data)
-            })
-            .catch((err) => console.error(err));
+    const [bookHistory, setBookHistory] = React.useState<BookData[]>();
+
+    const getBook = async () => {
+        const res = await fetch("http://localhost:3000/api/books/history?id=" + params.id);
+        const data = await res.json();
+        setBookHistory(data);
+        console.log(data, "dataaaaa")
     }
 
-
     useEffect(() => {
-        // fetch("http://localhost:3000/api/books/search")
-        fetch("http://localhost:3000/api/books?isbn=" + params.isbn)
+        fetch("http://localhost:3000/api/books?id=" + params.id)
             .then((res) => res.json())
             .then((data) => {
                 setBook(data[0])
-                
-                getBookHistory(data[0].id)
+                getBook()
                 console.log(data)
+                console.log(bookHistory, "bookHistory")
             })
             .catch((err) => console.error(err));
-        
-    }, [params.isbn]);
+    }, [params.id]);
 
+    const columns = [
+        { field: 'id', headerName: 'ID', width: 90 },
+        { field: 'name', headerName: 'Name', width: 90 },
+        { field: 'email', headerName: 'Email', width: 150 },
+        { field: 'date_of_borrowing', headerName: 'Borrow Date', width: 150 },
+        { field: 'expected_return_date', headerName: 'Expected Return Date', width: 150 },
+        { field: 'date_of_return', headerName: 'Return Date', width: 150 },
+        { field: 'late_charge', headerName: 'Late Charge', width: 150 },
+      ];
+
+    const rows =
+    bookHistory?.map((book : any)=>{
+            return(
+                {
+                    id:book.id,
+                    name:book.name,
+                    email:book.email,
+                    date_of_borrowing:book.date_of_borrowing,
+                    expected_return_date:book.expected_return_date,
+                    date_of_return:book.date_of_return,
+                    late_charge:book.late_charge
+
+                }
+            )
+        })
+    
     return (
+        <div>
+            {
+                !book ? <div> Book doesn't exist</div> : 
+            
         <div className="flex w-screen">
             <aside className="inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
                 <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
@@ -191,9 +227,13 @@ export default function BookDetails({ params }: { params: { isbn: number } }) {
                         {book?.description}
                     </p>
                 </div>
+                <DataGrid rows={rows} columns={columns} />
 
             </div>
 
         </div>
+        }
+        </div>
+        
     )
 }
