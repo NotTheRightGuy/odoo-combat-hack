@@ -97,7 +97,7 @@ const xLabels = [
   "Page G",
 ];
 
-export default function UserAnalytics() {
+export default function UserAnalytics({ params }: { params: { id: string } }) {
 
     const [userData, setUserdata] = React.useState([]);
 
