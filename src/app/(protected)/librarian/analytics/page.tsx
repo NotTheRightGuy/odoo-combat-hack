@@ -40,7 +40,7 @@
 
 import * as React from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
-("use client");
+
 import {
   Tooltip,
   TooltipContent,
