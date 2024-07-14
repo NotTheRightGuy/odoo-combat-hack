@@ -1,5 +1,44 @@
+// "use client";
+// import { useEffect } from "react"
+// import Box from '@mui/material/Box';
+// import { BarChart } from '@mui/x-charts/BarChart';
+
+// export default function UserAnalytics({ params }: { params: { userId: string } }) {
+
+//     useEffect(() => {
+//         fetch("http://localhost:3000/api/userAnalytics/" + params.userId)
+//             .then((res) => res.json())
+//             .then((data) => {
+//                 console.log(data)
+//             })
+//             .catch((err) => {
+//                 console.log(err)
+//             })
+//     }, [params.userId])
+
+//     const sample = [1, 10, 30, 50, 70, 90, 100];
+
+//     return (
+//         <Box sx={{ width: '100%', maxWidth: 500, display: 'flex', fontSize : 20 }}>
+//             <BarChart
+//                 series={[
+//                     { data: [3, 4, 1, 6, 5], label: 'Series A1' },
+//                 ]}
+//                 width={600}
+//                 height={350}
+//                 borderRadius={16}
+//                 // xAxis={[{ scaleType: 'band'}]}
+//                 yAxis={[{ scaleType: 'linear', tickLabelStyle : {fontSize: 15, } }]}
+//                 // xAxis={[{ scaleType: 'band' }]}
+
+//             />
+//         </Box>
+//     );
+// }
 "use client"
-import React, { useEffect } from "react";
+import * as React from 'react';
+import { BarChart } from '@mui/x-charts/BarChart';
+"use client"
 import {
     Tooltip,
     TooltipContent,
@@ -27,26 +66,39 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Books } from "@/types/index";
-export default function BookDetails({ params }: { params: { isbn: number } }) {
-    const [book, setBook] = React.useState<Books>();
+import { Button } from "@/components/ui/button";
 
-    useEffect(() => {
-        // fetch("http://localhost:3000/api/books/search")
-        fetch("http://localhost:3000/api/books/search?isbn=" + params.isbn)
+const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
+const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
+const xLabels = [
+    'Page A',
+    'Page B',
+    'Page C',
+    'Page D',
+    'Page E',
+    'Page F',
+    'Page G',
+];
+
+export default function UserAnalytics() {
+    
+    const [userData, setUserdata] = React.useState([]);
+
+    React.useEffect (() => {
+        fetch("http://localhost:3000/api/books")
             .then((res) => res.json())
             .then((data) => {
-                setBook(data[0])
+                setUserdata(data)
                 console.log(data)
             })
-            .catch((err) => console.error(err));
-    }, [params.isbn]);
-    // fetch("http://localhost:3000/api/books/search?isbn=" + params.isbn)
-    //     .then((res) => res.json())
-    //     .then((data) => console.log(data))
-    //     .catch((err) => console.error(err));
+            .catch((err) => {
+                console.log(err)
+            })
+    }, [])
+
     return (
-        <div className="flex ">
-            <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
+        <div className='w-screen flex'>
+            <aside className="inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
                 <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
                     <Link
                         href="#"
@@ -143,13 +195,23 @@ export default function BookDetails({ params }: { params: { isbn: number } }) {
                     </TooltipProvider>
                 </nav>
             </aside>
-            <div>
-                <h1>Book detail & checkout </h1>
-                <div>
-                    <img src={book?.thumbnail} alt="" />
-                </div>
-            </div>
 
-        </div>
-    )
+        <BarChart
+            width={500}
+            height={300}
+            series={[
+                { data: pData },
+            ]}
+            xAxis={[{ data: xLabels,
+                // data : userData.history.date 
+                scaleType: 'band', disableTicks: true, disableLine: true }]}
+                yAxis={[{ data : pData, 
+                // data: userData.history.borrowedBooks,
+                disableLine: true, disableTicks: true, scaleType: 'linear'}]}
+            borderRadius={16}
+            disableAxisListener={true}
+            
+            />
+            </div>
+    );
 }

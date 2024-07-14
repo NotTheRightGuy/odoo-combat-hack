@@ -109,8 +109,11 @@ export async function POST(req: NextRequest) {
   const { isbn, quantity }: { isbn: number; quantity: number } =
     await req.json();
 
+  if (quantity < 1) {
+    return NextResponse.json({ error: "Quantity should be greater than 0" });
+  }
   if (!isbn || !quantity) {
-    return { error: "Please provide ISBN and Quantity" };
+    return NextResponse.json({ error: "Please provide ISBN and Quantity" });
   }
 
   const response = await fetch(bookFetchingUrl + isbn);
