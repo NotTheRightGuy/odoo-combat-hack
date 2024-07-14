@@ -1,89 +1,156 @@
-export default function Home() {
+"use client";
+
+import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import LandingNavbar from "@/components/ui/LandingNavbar";
+
+const ShuffleHero = () => {
   return (
-    <div className="p-4">
-      <b>Welcome to JC Stack</b>
-      <p>This will serve as a starting point for your next project or hack</p>
-      <br />
-      <div>Following are the packages installed with this starter pack</div>
-      <ul className="list-inside list-disc">
-        <li>Tailwindcss</li>
-        <li>Framer Motion</li>
-        <li>Recoil</li>
-        <li>React Query</li>
-        <li>
-          Next Auth
-          <ul className="list-inside list-disc pl-6">
-            <li>
-              Add a{" "}
-              <code className="bg-gray-100 px-1 rounded-md">AUTH_SECRET</code>{" "}
-              in .env to be used as a secret key
-            </li>
-            <li>
-              Wrap your component with{" "}
-              <code className="bg-gray-100 px-1 rounded-md">
-                {"<ProtectedRoute>"}
-              </code>{" "}
-              to make it accessible only on session
-            </li>
-            <li>
-              Similarly use{" "}
-              <code className="bg-gray-100 px-1 rounded-md">
-                {'<RoleRoute role="">'}
-              </code>
-              to make it accessible only on session and role
-            </li>
-            <li>
-              Helper hooks are provided with the package to get session and role
-              details
-            </li>
-            <li>
-              Check{" "}
-              <code className="bg-gray-100 px-1 rounded-md">
-                {" "}
-                /api/auth/[...nextauth]/route.ts{" "}
-              </code>
-              to make any changes and add logic to authorize user
-            </li>
-            <li>
-              Visit{" "}
-              <code className="bg-gray-100 px-1 rounded-md">/protected</code>,{" "}
-              <code className="bg-gray-100 px-1 rounded-md">
-                /protected/admin
-              </code>{" "}
-              and{" "}
-              <code className="bg-gray-100 px-1 rounded-md">
-                /protected/user
-              </code>{" "}
-              to see the implementation
-            </li>
-          </ul>
-        </li>
-        <li>Prisma</li>
-        <li>Shadcn</li>
-      </ul>
-      <br />
-      <div>
-        Workspace for formatting on push and pull to GitHub is configured as
-        well
-      </div>
-      <br />
-      <div>Following npm commands are present as well</div>
-      <ul className="list-inside list-disc">
-        <li>
-          <code>npm run lint:check</code> - to check for linting issues
-        </li>
-        <li>
-          <code>npm run lint:fix</code> - to automatically fix linting issues
-        </li>
-        <li>
-          <code>npm run format:check</code> - to check for formatting issues
-        </li>
-        <li>
-          <code>npm run format:fix</code> - to automatically fix formatting
-          issues
-        </li>
-      </ul>
-      <br />
+    <>
+      <LandingNavbar />
+      <section className="w-full px-8 py-12 grid grid-cols-1 mt-6 md:grid-cols-2 items-center gap-8 max-w-6xl mx-auto">
+        <div>
+          <span className="block mb-4 text-xs md:text-sm text-indigo-500 font-medium">
+            Making it fun
+          </span>
+          <h3 className="text-4xl md:text-6xl font-semibold">
+            Managing Books <br /> Made Easy
+          </h3>
+          <p className="text-base md:text-lg text-slate-700 my-4 md:my-6">
+            Managing a library has never been easier. With our platform, you can
+            easily manage your books, track your reading progress, and find new
+            books to read.
+          </p>
+          <button className="bg-indigo-500 text-white font-medium py-2 px-4 rounded transition-all hover:bg-indigo-600 active:scale-95">
+            Borrow a book
+          </button>
+        </div>
+        <ShuffleGrid />
+      </section>
+    </>
+  );
+};
+
+const shuffle = (array: (typeof squareData)[0][]) => {
+  let currentIndex = array.length,
+    randomIndex;
+
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
+};
+
+const squareData = [
+  {
+    id: 1,
+    src: "https://images.unsplash.com/photo-1547347298-4074fc3086f0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+  },
+  {
+    id: 2,
+    src: "https://images.unsplash.com/photo-1510925758641-869d353cecc7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+  },
+  {
+    id: 3,
+    src: "https://images.unsplash.com/photo-1629901925121-8a141c2a42f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+  },
+  {
+    id: 4,
+    src: "https://images.unsplash.com/photo-1580238053495-b9720401fd45?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+  },
+  {
+    id: 5,
+    src: "https://images.unsplash.com/photo-1569074187119-c87815b476da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1325&q=80",
+  },
+  {
+    id: 6,
+    src: "https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+  },
+  {
+    id: 7,
+    src: "https://images.unsplash.com/photo-1599586120429-48281b6f0ece?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+  },
+  {
+    id: 8,
+    src: "https://plus.unsplash.com/premium_photo-1671436824833-91c0741e89c9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+  },
+  {
+    id: 9,
+    src: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+  },
+  {
+    id: 10,
+    src: "https://images.unsplash.com/photo-1610768764270-790fbec18178?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+  },
+  {
+    id: 11,
+    src: "https://images.unsplash.com/photo-1507034589631-9433cc6bc453?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=684&q=80",
+  },
+  {
+    id: 12,
+    src: "https://images.unsplash.com/photo-1533107862482-0e6974b06ec4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=882&q=80",
+  },
+  {
+    id: 13,
+    src: "https://images.unsplash.com/photo-1560089000-7433a4ebbd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+  },
+  {
+    id: 14,
+    src: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80",
+  },
+  {
+    id: 15,
+    src: "https://images.unsplash.com/photo-1606244864456-8bee63fce472?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=681&q=80",
+  },
+  {
+    id: 16,
+    src: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1820&q=80",
+  },
+];
+
+const generateSquares = () => {
+  return shuffle(squareData).map((sq) => (
+    <motion.div
+      key={sq.id}
+      layout
+      transition={{ duration: 1.5, type: "spring" }}
+      className="w-full h-full"
+      style={{
+        backgroundImage: `url(${sq.src})`,
+        backgroundSize: "cover",
+      }}
+    ></motion.div>
+  ));
+};
+
+const ShuffleGrid = () => {
+  const timeoutRef = useRef<any>(null);
+  const [squares, setSquares] = useState(generateSquares());
+
+  useEffect(() => {
+    shuffleSquares();
+
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
+
+  const shuffleSquares = () => {
+    setSquares(generateSquares());
+
+    timeoutRef.current = setTimeout(shuffleSquares, 3000);
+  };
+
+  return (
+    <div className="grid grid-cols-4 grid-rows-4 h-[450px] gap-1">
+      {squares.map((sq) => sq)}
     </div>
   );
-}
+};
+
+export default ShuffleHero;
