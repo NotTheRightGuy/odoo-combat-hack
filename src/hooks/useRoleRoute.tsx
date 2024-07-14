@@ -1,27 +1,27 @@
 // useRoleRoute.tsx
 "use client";
 
-import { useSession } from "next-auth/react";
+import { useAuth, useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const useRoleRoute = () => {
-  const { data: session, status } = useSession();
+  const { isLoaded, userId } = useAuth();
+  const { user } = useUser();
   const router = useRouter();
 
   useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/api/auth/signin");
+    if (isLoaded && !userId) {
+      router.push("/sign-in");
     }
-  }, [status, router]);
+  }, [isLoaded, userId, router]);
 
   // Return role if authenticated
-  const role =
-    status === "authenticated"
-      ? (session?.user?.role as string | undefined)
-      : undefined;
+  const role = userId
+    ? (user?.unsafeMetadata.role as string | undefined)
+    : undefined;
 
-  return { session, status, role };
+  return { isLoaded, userId, role };
 };
 
 export default useRoleRoute;

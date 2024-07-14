@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import {
   Table,
@@ -12,21 +13,23 @@ import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { Books } from "@/types/index";
+import { useRouter } from "next/navigation";
 
 function BooksTable() {
   const [books, setBooks] = useState<Books[]>();
   useEffect(() => {
-    fetch("http://localhost:3000/api/books/search")
+    fetch("/api/books/")
       .then((response) => response.json())
-      .then((data) =>{ 
-        setBooks(data)
-        console.log(data)
-    })
-        .catch((error) => console.error(error));
+      .then((data) => {
+        setBooks(data);
+        console.log(data);
+      })
+      .catch((error) => console.error(error));
   }, []);
+  const router = useRouter();
   return (
     <div>
-      <Table>
+      <Table className="h-[500px]">
         <TableHeader>
           <TableRow>
             <TableHead></TableHead>
@@ -37,39 +40,75 @@ function BooksTable() {
             <TableHead className="text-right"></TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
-          {/* {books.map((book, index) => (
-            <TableRow key={index}>
-              <TableCell>
-                <Image
-                  alt={book[0].title}
-                  className="hidden text-sm text-muted-foreground md:inline"
-                  src={book[0].thumbnail}
-                >
-                  {book.isbn}
-                </Image>
+        <TableBody className="overflow-y-scroll h-">
+          {books?.map((book, index) => (
+            <TableRow key={index} className="h-10 overflow-hidden">
+              <TableCell className="p-2">
+                <div className="overflow-hidden rounded-sm w-full h-full">
+                  <Image
+                    alt={book.title}
+                    width={70}
+                    height={50}
+                    className="hidden text-sm text-muted-foreground md:inline-block rounded-sm"
+                    src={book.thumbnail}
+                  />
+                </div>
               </TableCell>
               <TableCell>
                 <div className="hidden text-sm text-muted-foreground md:inline">
-                  {book[0].title}
+                  {book.title}
                 </div>
               </TableCell>
               <TableCell className="hidden sm:table-cell">
-                {book[0].isbn}
+                {book.isbn}
               </TableCell>
               <TableCell className="hidden sm:table-cell">
-                {book[0].quantity}
+                {book.quantity}
               </TableCell>
               <TableCell className="hidden md:table-cell">
-                <Badge className="text-xs">{book[0].available}</Badge>
+                <Badge className={book.available ? "bg-green-100 text-green-700 hover:bg-green-100": "bg-red-100 text-red-700 hover:bg-red-100" }>{book.available ? "Available":"Not Available"}</Badge>
               </TableCell>
-              <TableCell className="" onClick={() => redirect(`/book/${book[0].isbn}`)}>
+              <TableCell onClick={() => redirect(`/book/${book.isbn}`)}>
                 <div className="p-2 w-fit rounded-lg hover:bg-slate-100">
                   <ChevronRight className="text-slate-900" />
                 </div>
               </TableCell>
             </TableRow>
-          ))} */}
+          ))}
+          {books?.map((book, index) => (
+            <TableRow key={index} className="h-10 overflow-hidden">
+              <TableCell className="p-2">
+                <div className="overflow-hidden rounded-sm w-full h-full">
+                  <Image
+                    alt={book.title}
+                    width={70}
+                    height={50}
+                    className="hidden text-sm text-muted-foreground md:inline-block rounded-sm"
+                    src={book.thumbnail}
+                  />
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="hidden text-sm text-muted-foreground md:inline">
+                  {book.title}
+                </div>
+              </TableCell>
+              <TableCell className="hidden sm:table-cell">
+                {book.isbn}
+              </TableCell>
+              <TableCell className="hidden sm:table-cell">
+                {book.quantity}
+              </TableCell>
+              <TableCell className="hidden md:table-cell">
+                <Badge className={book.available ? "bg-green-100 text-green-700 hover:bg-green-100": "bg-red-100 text-red-700 hover:bg-red-100" }>{book.available ? "Available":"Not Available"}</Badge>
+              </TableCell>
+              <TableCell >
+                <div className="p-2 w-fit rounded-lg hover:bg-slate-100">
+                  <ChevronRight className="text-slate-900" />
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </div>

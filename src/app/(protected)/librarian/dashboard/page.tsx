@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { HiOutlineChartBar, HiOutlineCollection } from "react-icons/hi";
 import {
+  Book,
   ChevronLeft,
   ChevronRight,
   Copy,
@@ -86,6 +87,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import BooksTable from "@/components/ui/BooksTable";
 
 function LibrarianDashboard() {
   return (
@@ -260,9 +262,9 @@ function LibrarianDashboard() {
                 </div>
               </div>
               <TabsContent value="week">
-                <Card x-chunk="dashboard-05-chunk-3">
-                  <CardContent className="mt-10 overflow-y-scroll">
-                    
+                <Card x-chunk="dashboard-05-chunk-3" className="overflow-y-scroll h-[500px]">
+                  <CardContent className="mt-10 ">
+                    <BooksTable />
                   </CardContent>
                 </Card>
               </TabsContent>
