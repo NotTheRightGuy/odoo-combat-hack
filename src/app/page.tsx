@@ -37,7 +37,7 @@ export default function page() {
           </a>
         </div>
         <h1 className="max-w-4xl text-center text-4xl font-black leading-[1.15] md:text-6xl md:leading-[1.15]">
-          Managing your Library just got easier
+          Managing Your Library Just Got Easier
         </h1>
         <p className="mx-auto my-4 max-w-3xl text-center text-base leading-relaxed md:my-6 md:text-xl md:leading-relaxed">
           We know it can be hard to manage a library, so we made it easier for
