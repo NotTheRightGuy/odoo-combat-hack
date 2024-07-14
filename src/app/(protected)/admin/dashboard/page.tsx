@@ -93,7 +93,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-function LibrarianDashboard() {
+function AdminDashboard() {
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-20 flex-col border-r bg-background sm:flex">
@@ -297,4 +297,4 @@ function LibrarianDashboard() {
     </div>
   );
 }
-export default LibrarianDashboard;
+export default AdminDashboard;
