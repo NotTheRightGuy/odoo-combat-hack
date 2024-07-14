@@ -1,7 +1,7 @@
 "use client";
 import { RecoilRoot } from "recoil";
-import { SessionProvider } from "next-auth/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const queryClient = new QueryClient();
 
@@ -13,7 +13,7 @@ export default function Provider({
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <SessionProvider>{children}</SessionProvider>
+        <ClerkProvider>{children}</ClerkProvider>
       </RecoilRoot>
     </QueryClientProvider>
   );
