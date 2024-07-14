@@ -1,4 +1,7 @@
+"use client"
+"use client";
 // "use client";
+
 // import { useEffect } from "react"
 // import Box from '@mui/material/Box';
 // import { BarChart } from '@mui/x-charts/BarChart';
@@ -35,34 +38,32 @@
 //         </Box>
 //     );
 // }
-"use client"
 import * as React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
-"use client"
 import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 import {
-    ChevronLeft,
-    ChevronRight,
-    Copy,
-    CreditCard,
-    File,
-    Home,
-    LineChart,
-    ListFilter,
-    MoreVertical,
-    Package,
-    Package2,
-    PanelLeft,
-    Search,
-    Settings,
-    ShoppingCart,
-    Truck,
-    Users2,
+  ChevronLeft,
+  ChevronRight,
+  Copy,
+  CreditCard,
+  File,
+  Home,
+  LineChart,
+  ListFilter,
+  MoreVertical,
+  Package,
+  Package2,
+  PanelLeft,
+  Search,
+  Settings,
+  ShoppingCart,
+  Truck,
+  Users2,
 } from "lucide-react";
 import Link from "next/link";
 import { Books } from "@/types/index";
@@ -71,20 +72,20 @@ import { Button } from "@/components/ui/button";
 const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
 const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
 const xLabels = [
-    'Page A',
-    'Page B',
-    'Page C',
-    'Page D',
-    'Page E',
-    'Page F',
-    'Page G',
+  "Page A",
+  "Page B",
+  "Page C",
+  "Page D",
+  "Page E",
+  "Page F",
+  "Page G",
 ];
 
 export default function UserAnalytics() {
-    
+
     const [userData, setUserdata] = React.useState([]);
 
-    React.useEffect (() => {
+    React.useEffect(() => {
         fetch("http://localhost:3000/api/books")
             .then((res) => res.json())
             .then((data) => {
@@ -97,7 +98,7 @@ export default function UserAnalytics() {
     }, [])
 
     return (
-        <div className='w-screen flex'>
+        <div className='w-screen flex bg-slate-50'>
             <aside className="inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
                 <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
                     <Link
@@ -195,23 +196,35 @@ export default function UserAnalytics() {
                     </TooltipProvider>
                 </nav>
             </aside>
+            <div>
+                <h1> Analytics </h1>
+                <div className='flex gap-2'>
+                    <div className='bg-white border rounded-md'>
 
-        <BarChart
-            width={500}
-            height={300}
-            series={[
-                { data: pData },
-            ]}
-            xAxis={[{ data: xLabels,
-                // data : userData.history.date 
-                scaleType: 'band', disableTicks: true, disableLine: true }]}
-                yAxis={[{ data : pData, 
-                // data: userData.history.borrowedBooks,
-                disableLine: true, disableTicks: true, scaleType: 'linear'}]}
-            borderRadius={16}
-            disableAxisListener={true}
-            
-            />
+                        <BarChart
+                            width={500}
+                            height={300}
+                            series={[
+                                { data: pData },
+                            ]}
+                            xAxis={[{
+                                data: xLabels,
+                                // data : userData.history.date 
+                                scaleType: 'band', disableTicks: true, disableLine: true
+                            }]}
+                            yAxis={[{
+                                data: pData,
+                                // data: userData.history.borrowedBooks,
+                                disableLine: true, disableTicks: true, scaleType: 'linear'
+                            }]}
+                            borderRadius={16}
+                            disableAxisListener={true}
+
+                        />
+                    </div>
+
+                </div>
             </div>
+        </div>
     );
 }
