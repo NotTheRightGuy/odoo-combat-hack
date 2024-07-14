@@ -59,7 +59,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {
- 
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -80,7 +79,6 @@ import {
   MoreVertical,
   Package,
   Package2,
-
   Search,
   Settings,
   ShoppingCart,
@@ -284,10 +282,6 @@ export default function UserAnalytics() {
 
               onItemClick={(e) => {
                 // colors={['#3B82F6']}
-                e.target.style.fill = "#3B82F6";
-                setTimeout(() => {
-                  e.target.style.fill = "#DBEAFE";
-                }, 1000);
               }}
               borderRadius={16}
               disableAxisListener={true}

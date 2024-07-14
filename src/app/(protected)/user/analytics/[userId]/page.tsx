@@ -1,7 +1,3 @@
-
-
-
-
 // // "use client";
 // // import { useEffect } from "react"
 // // import Box from '@mui/material/Box';
@@ -56,7 +52,7 @@
 // ];
 
 // export default function UserAnalytics({ params }: { params: { userId: string } }) {
-    
+
 //     const [userData, setUserdata] = React.useState([]);
 
 //     React.useEffect (() => {
@@ -79,9 +75,9 @@
 //                 { data: pData },
 //             ]}
 //             xAxis={[{ data: xLabels,
-//                 // data : userData.history.date 
+//                 // data : userData.history.date
 //                 scaleType: 'band', disableTicks: true, disableLine: true }]}
-//             yAxis={[{ data : pData, 
+//             yAxis={[{ data : pData,
 //                 // data: userData.history.borrowedBooks,
 //                 disableLine: true, disableTicks: true, scaleType: 'linear'}]}
 //             borderRadius={16}
@@ -90,3 +86,7 @@
 //         />
 //     );
 // }
+
+export default function () {
+  return <div>Analytics</div>;
+}

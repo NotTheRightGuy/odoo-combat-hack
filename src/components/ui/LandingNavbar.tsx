@@ -58,9 +58,7 @@ const SlideTabs = () => {
       >
         Librarian
       </Tab>
-      <Tab setPosition={setPosition}>
-        {isSignedIn ? <SignOutButton /> : <SignInButton />}
-      </Tab>
+      {isSignedIn ? <SignOutButton /> : <SignInButton />}
 
       {isSignedIn &&
         (<>Dashboard</> ? (
