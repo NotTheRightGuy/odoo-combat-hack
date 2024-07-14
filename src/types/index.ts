@@ -33,9 +33,9 @@ export type User = {
 export type LendingHistory = {
   id?: number;
   user_id: number;
-  borrowed_books: number[];
+  borrowed_book: number[];
   date_of_borrowing: string;
   expected_return_date: string;
-  date_of_return: string;
+  date_of_return?: string;
   late_charge: number;
 };
