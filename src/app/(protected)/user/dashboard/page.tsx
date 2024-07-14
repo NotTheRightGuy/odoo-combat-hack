@@ -277,10 +277,7 @@ function LibrarianDashboard() {
                       </TableHeader>
                       <TableBody>
                         <TableRow>
-                          <TableCell>
-                            
-                            Book Title
-                            </TableCell>
+                          <TableCell>Book Title</TableCell>
                           <TableCell>Author Name</TableCell>
                           <TableCell>Book Genre</TableCell>
                           <TableCell>

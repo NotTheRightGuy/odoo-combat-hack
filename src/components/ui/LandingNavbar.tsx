@@ -3,8 +3,8 @@
 import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useUser } from "@clerk/nextjs";
-import { SignOutButton } from "@clerk/nextjs";
-import { SignInButton } from "@clerk/nextjs";
+import { SignOutButton, SignInButton } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 const SlideTabsExample = () => {
   return (
@@ -16,6 +16,7 @@ const SlideTabsExample = () => {
 
 const SlideTabs = () => {
   const { isSignedIn, user } = useUser();
+  const router = useRouter();
 
   const [position, setPosition] = useState<Position>({
     left: 0,
@@ -33,9 +34,30 @@ const SlideTabs = () => {
       }}
       className="relative mx-auto flex w-fit rounded-full border-2 border-black bg-white p-1"
     >
-      <Tab setPosition={setPosition}>User</Tab>
-      <Tab setPosition={setPosition}>Admin</Tab>
-      <Tab setPosition={setPosition}>Librarian</Tab>
+      <Tab
+        setPosition={setPosition}
+        onClick={() => {
+          router.push("/user/dashboard");
+        }}
+      >
+        User
+      </Tab>
+      <Tab
+        setPosition={setPosition}
+        onClick={() => {
+          router.push("/admin/dashboard");
+        }}
+      >
+        Admin
+      </Tab>
+      <Tab
+        setPosition={setPosition}
+        onClick={() => {
+          router.push("/librarian/dashboard");
+        }}
+      >
+        Librarian
+      </Tab>
       <Tab setPosition={setPosition}>
         {isSignedIn ? <SignOutButton /> : <SignInButton />}
       </Tab>
