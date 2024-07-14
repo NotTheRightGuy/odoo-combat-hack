@@ -10,6 +10,7 @@ export async function GET(request: NextRequest) {
   const author = searchParams.get("author");
   const genre = searchParams.get("genre");
   const year = searchParams.get("year");
+  const isbn = searchParams.get("isbn");
 
   let query = client.from("Books").select("*");
 
@@ -27,6 +28,9 @@ export async function GET(request: NextRequest) {
   if (year) {
     // Assuming publishedDate is stored as a string in 'YYYY-MM-DD' format
     query = query.ilike("publishedDate", `${year}%`);
+  }
+  if (isbn) {
+    query = query.eq("isbn", isbn);
   }
 
   try {
