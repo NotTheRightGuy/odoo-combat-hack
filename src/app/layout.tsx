@@ -7,8 +7,8 @@ import { Toaster } from "@/components/ui/sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "JCstack to the Moon 🚀",
-  description: "Nextjs Starter pack with batteries included",
+  title: "Library Management System",
+  description: "Managing Library Just Got Easier",
 };
 
 export default function RootLayout({
