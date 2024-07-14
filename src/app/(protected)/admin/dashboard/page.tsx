@@ -92,6 +92,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import BooksTable from "@/components/ui/BooksTable";
 
 function AdminDashboard() {
   return (
@@ -220,7 +221,10 @@ function AdminDashboard() {
               </nav>
             </SheetContent>
           </Sheet>
-          <div className="text-2xl font-semibold">Admin Dashboard</div>
+          <div className="text-2xl font-semibold flex justify-between w-full">
+            <p>Admin Dashboard</p>
+            <button className="text-sm font-semibold ">Add new book</button>
+          </div>
         </header>
         <main className="flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
           <div className="relative flex-1 md:grow-0 flex items-end justify-start gap-2 w-full">
@@ -268,25 +272,7 @@ function AdminDashboard() {
               <TabsContent value="week">
                 <Card x-chunk="dashboard-05-chunk-3">
                   <CardContent className="mt-10 overflow-y-scroll">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="w-[40%]">Name</TableHead>
-                          <TableHead className="w-[30%]">Author</TableHead>
-                          <TableHead className="w-[30%]">Genre</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell>Book Title</TableCell>
-                          <TableCell>Author Name</TableCell>
-                          <TableCell>Book Genre</TableCell>
-                          <TableCell>
-                            <HiOutlineChevronRight />
-                          </TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
+                    <BooksTable role="admin" />
                   </CardContent>
                 </Card>
               </TabsContent>

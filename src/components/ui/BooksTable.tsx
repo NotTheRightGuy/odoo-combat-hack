@@ -15,7 +15,7 @@ import { redirect } from "next/navigation";
 import { Books } from "@/types/index";
 import { useRouter } from "next/navigation";
 
-function BooksTable() {
+function BooksTable({role}: {role: string}) {
   const [books, setBooks] = useState<Books[]>();
   useEffect(() => {
     fetch("/api/books/")
