@@ -1,3 +1,4 @@
+"use client"
 // "use client";
 // import { useEffect } from "react"
 // import Box from '@mui/material/Box';
@@ -35,10 +36,8 @@
 //         </Box>
 //     );
 // }
-"use client"
 import * as React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
-"use client"
 import {
     Tooltip,
     TooltipContent,
@@ -81,10 +80,10 @@ const xLabels = [
 ];
 
 export default function UserAnalytics() {
-    
+
     const [userData, setUserdata] = React.useState([]);
 
-    React.useEffect (() => {
+    React.useEffect(() => {
         fetch("http://localhost:3000/api/books")
             .then((res) => res.json())
             .then((data) => {
@@ -97,7 +96,7 @@ export default function UserAnalytics() {
     }, [])
 
     return (
-        <div className='w-screen flex'>
+        <div className='w-screen flex bg-slate-50'>
             <aside className="inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
                 <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
                     <Link
@@ -195,23 +194,35 @@ export default function UserAnalytics() {
                     </TooltipProvider>
                 </nav>
             </aside>
+            <div>
+                <h1> Analytics </h1>
+                <div className='flex gap-2'>
+                    <div className='bg-white border rounded-md'>
 
-        <BarChart
-            width={500}
-            height={300}
-            series={[
-                { data: pData },
-            ]}
-            xAxis={[{ data: xLabels,
-                // data : userData.history.date 
-                scaleType: 'band', disableTicks: true, disableLine: true }]}
-                yAxis={[{ data : pData, 
-                // data: userData.history.borrowedBooks,
-                disableLine: true, disableTicks: true, scaleType: 'linear'}]}
-            borderRadius={16}
-            disableAxisListener={true}
-            
-            />
+                        <BarChart
+                            width={500}
+                            height={300}
+                            series={[
+                                { data: pData },
+                            ]}
+                            xAxis={[{
+                                data: xLabels,
+                                // data : userData.history.date 
+                                scaleType: 'band', disableTicks: true, disableLine: true
+                            }]}
+                            yAxis={[{
+                                data: pData,
+                                // data: userData.history.borrowedBooks,
+                                disableLine: true, disableTicks: true, scaleType: 'linear'
+                            }]}
+                            borderRadius={16}
+                            disableAxisListener={true}
+
+                        />
+                    </div>
+
+                </div>
             </div>
+        </div>
     );
 }
