@@ -10,14 +10,13 @@ interface RoleRouteProps {
 }
 
 const RoleRoute: React.FC<RoleRouteProps> = ({ children, role }) => {
-  const { status, role: userRole } = useRoleRoute();
+  const { isLoaded, role: userRole } = useRoleRoute();
 
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
-
-  if (status === "authenticated" && userRole === role) {
+  if (isLoaded && userRole === role) {
     return <>{children}</>;
+  }
+  if (!isLoaded) {
+    return <div className="p-4">Loading Data...</div>;
   }
 
   return (

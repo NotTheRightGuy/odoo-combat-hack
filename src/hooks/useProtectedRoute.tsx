@@ -1,18 +1,18 @@
-import { useSession } from "next-auth/react";
+import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const useProtectedRoute = () => {
-  const { data: session, status } = useSession();
+  const { isLoaded, userId, sessionId } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/api/auth/signin");
+    if (isLoaded && !userId) {
+      router.push("/auth/sign-in");
     }
-  }, [status, router, session]);
+  }, [isLoaded, userId, router]);
 
-  return { session, status };
+  return { isLoaded, userId, sessionId };
 };
 
 export default useProtectedRoute;

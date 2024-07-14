@@ -1,4 +1,3 @@
-import AuthStatus from "@/components/AuthStatus";
 export default function Home() {
   return (
     <div className="p-4">
@@ -85,8 +84,6 @@ export default function Home() {
         </li>
       </ul>
       <br />
-      <div>Authentication Status</div>
-      <AuthStatus />
     </div>
   );
 }
