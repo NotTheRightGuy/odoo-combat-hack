@@ -89,7 +89,7 @@ import {
 } from "@/components/ui/select";
 import BooksTable from "@/components/ui/BooksTable";
 
-function LibrarianDashboard() {
+export default function LibrarianDashboard() {
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-20 flex-col border-r bg-background sm:flex">
@@ -122,7 +122,7 @@ function LibrarianDashboard() {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="#"
+                  href="/librarian/analytics"
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:p-3 md:w-max md:h-max "
                 >
                   <HiOutlineChartBar
@@ -139,7 +139,7 @@ function LibrarianDashboard() {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="#"
+                  href="/librarian/history"
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:p-3 md:w-max md:h-max "
                 >
                   <History
@@ -262,7 +262,10 @@ function LibrarianDashboard() {
                 </div>
               </div>
               <TabsContent value="week">
-                <Card x-chunk="dashboard-05-chunk-3" className="overflow-y-scroll h-[500px]">
+                <Card
+                  x-chunk="dashboard-05-chunk-3"
+                  className="overflow-y-scroll h-[500px]"
+                >
                   <CardContent className="mt-10 ">
                     <BooksTable />
                   </CardContent>
@@ -275,4 +278,3 @@ function LibrarianDashboard() {
     </div>
   );
 }
-export default LibrarianDashboard;
