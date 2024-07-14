@@ -29,6 +29,8 @@ import Link from "next/link";
 import { Books } from "@/types/index";
 import { Button } from "@/components/ui/button";
 import { DataGrid } from '@mui/x-data-grid';
+// import { useRouter } from "next/router";
+
 
 interface BookData {
     id: number;
@@ -42,6 +44,9 @@ interface BookData {
 
 export default function BookDetails({ params }: { params: { id: number } }) {
     const [book, setBook] = React.useState<Books>();
+
+    // const router = useRouter();
+
 
     const [bookHistory, setBookHistory] = React.useState<BookData[]>();
 
@@ -216,6 +221,12 @@ export default function BookDetails({ params }: { params: { id: number } }) {
                     </div>
                     <div className="flex flex-col justify-between">
                         <Button className="bg-green-100 text-green-700"> Available </Button>
+                        <Button onClick={
+                            () => {
+                                // router.push(`/librarian/book/analytics/${params.id}`)
+                                window.location.href = `/librarian/analytics/${params.id}`
+                            }
+                        }> Analytics </Button>
                         <Button> Lend Book </Button>
                     </div>
                 </div>
