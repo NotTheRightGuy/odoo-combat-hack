@@ -13,10 +13,31 @@ const AddBookModal = () => {
     setIsOpen(true);
   }, []);
 
-  const handleAddBook = () => {
+  const handleAddBook = async () => {
     // Add your logic to handle adding the book
     console.log("Adding book with ISBN:", isbn, "and quantity:", quantity);
     setIsOpen(false);
+    try {
+      console.log("Adding book with ISBN:", isbn, "and quantity:", quantity);
+      const response = await fetch("/api/books", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ isbn, quantity }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Failed to add book:", errorText);
+        return;
+      }
+
+      const data = await response.json();
+      console.log("Book added successfully:", data);
+    } catch (error) {
+      console.error("Failed to add book", error);
+    }
   };
 
   return (

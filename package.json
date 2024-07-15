@@ -33,6 +33,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.2.12",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.397.0",
     "mailgun.js": "^10.2.1",
     "next": "14.2.4",
@@ -49,6 +50,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.6",
     "@types/mailgun-js": "^0.22.18",
     "@types/node": "^20",
     "@types/react": "^18",

@@ -15,17 +15,23 @@ import { redirect } from "next/navigation";
 import { Books } from "@/types/index";
 import { useRouter } from "next/navigation";
 
-function UserBooksTable() {
+function UserBooksTable({
+  searchValue = "",
+  filter = "title",
+}: {
+  searchValue: string;
+  filter: string;
+}) {
   const [books, setBooks] = useState<Books[]>();
   useEffect(() => {
-    fetch("/api/books/")
+    fetch(`/api/books/?${filter}=${searchValue}`)
       .then((response) => response.json())
       .then((data) => {
         setBooks(data);
         console.log(data);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [searchValue, filter]);
   const router = useRouter();
   return (
     <div className="w-full flex items-center justify-center">
@@ -64,11 +70,17 @@ function UserBooksTable() {
                 {book.authors}
               </TableCell>
               <TableCell className="hidden sm:table-cell">
-                {book.categories.map((category) => (
-                  <Badge key={category} className="mr-1">
-                    {category}
+                {book?.categories ? (
+                  book.categories.map((category) => (
+                    <Badge key={category} className="mr-1">
+                      {category}
+                    </Badge>
+                  ))
+                ) : (
+                  <Badge className="mr-1">
+                    Not Specified
                   </Badge>
-                ))}
+                )}
               </TableCell>
               <TableCell className="hidden md:table-cell">
                 <Badge
@@ -85,7 +97,11 @@ function UserBooksTable() {
                 {book.publishedDate}
               </TableCell>
               <TableCell className="">
-                <div className="p-2 rounded-lg w-max hover:bg-slate-100" onClick={() => router.push(`/user/book/${book.id}`)} role="button">
+                <div
+                  className="p-2 rounded-lg w-max hover:bg-slate-100"
+                  onClick={() => router.push(`/user/book/${book.id}`)}
+                  role="button"
+                >
                   <ChevronRight className="text-slate-900" />
                 </div>
               </TableCell>

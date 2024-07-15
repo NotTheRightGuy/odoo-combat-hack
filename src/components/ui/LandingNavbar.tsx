@@ -58,7 +58,14 @@ const SlideTabs = () => {
       >
         Librarian
       </Tab>
-      {isSignedIn ? <SignOutButton /> : <SignInButton />}
+      <Tab
+        setPosition={setPosition}
+        onClick={() => {
+          router.push("/librarian/dashboard");
+        }}
+      >
+        {isSignedIn ? <SignOutButton /> : <SignInButton />}
+      </Tab>
 
       {isSignedIn &&
         (<>Dashboard</> ? (
@@ -75,7 +82,7 @@ const Tab = ({
   setPosition,
   onClick,
 }: {
-  children: string;
+  children: React.ReactNode;
   setPosition: Dispatch<SetStateAction<Position>>;
   onClick?: any;
 }) => {

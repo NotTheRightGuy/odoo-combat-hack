@@ -1,81 +1,19 @@
 "use client";
 import * as React from "react";
-import Image from "next/image";
+
 import Link from "next/link";
-<AddBookModal ></AddBookModal>
+<AddBookModal></AddBookModal>;
 import {
-  HiArrowRight,
   HiOutlineChartBar,
-  HiOutlineChevronRight,
   HiOutlineCollection,
   HiOutlineUserGroup,
 } from "react-icons/hi";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Copy,
-  CreditCard,
-  File,
-  History,
-  Home,
-  LineChart,
-  ListFilter,
-  MoreVertical,
-  Package,
-  Package2,
-  PanelLeft,
-  Search,
-  Settings,
-  ShoppingCart,
-  Truck,
-  User,
-  Users2,
-} from "lucide-react";
+import { PanelLeft, Search, User } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-} from "@/components/ui/pagination";
-import { Progress } from "@/components/ui/progress";
-import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Tooltip,
@@ -83,7 +21,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import RoleRoute from "@/components/RoleRoute";
 import Logo from "@/components/icons/Logo";
 import {
   Select,
@@ -94,17 +31,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-<<<<<<< HEAD
 import AddBookModal from "@/components/ui/AddBookModal";
-=======
 import BooksTable from "@/components/ui/BooksTable";
->>>>>>> fdf277172dc15e321ddc7408f0cb1afdc08d1e10
-
+import { debounce } from "lodash";
 function AdminDashboard() {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [Filter, setFilter] = React.useState("");
+  const [search, setSearch] = React.useState("");
   function handleClick() {
     setIsOpen(!isOpen);
   }
+  const handleSearchChange = debounce((e) => {
+    console.log(e.target.value);
+    setSearch(e.target.value);
+  }, 800);
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-20 flex-col border-r bg-background sm:flex">
@@ -240,7 +180,7 @@ function AdminDashboard() {
               Add new book
             </button>
           </div>
-          {isOpen && <AddBookModal/>}
+          {isOpen && <AddBookModal />}
         </header>
         <main className="flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
           <div className="relative flex-1 md:grow-0 flex items-end justify-start gap-2 w-full">
@@ -254,6 +194,7 @@ function AdminDashboard() {
                   type="search"
                   placeholder="Search..."
                   className="w-full rounded-lg bg-background pl-8 md:w-full lg:w-full "
+                  onChange={handleSearchChange}
                 />
               </div>
             </div>
@@ -261,7 +202,11 @@ function AdminDashboard() {
               <div className="text-slate-800 font-medium text-sm mb-2">
                 Filter books
               </div>
-              <Select>
+              <Select
+                onValueChange={(value) => (
+                  console.log(value), setFilter(value)
+                )}
+              >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Filter by " />
                 </SelectTrigger>
@@ -288,7 +233,7 @@ function AdminDashboard() {
               <TabsContent value="week">
                 <Card x-chunk="dashboard-05-chunk-3">
                   <CardContent className="mt-10 overflow-y-scroll">
-                    <BooksTable role="admin" />
+                    <BooksTable role="admin" searchValue={search} filter={Filter} />
                   </CardContent>
                 </Card>
               </TabsContent>

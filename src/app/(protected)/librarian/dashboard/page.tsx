@@ -1,82 +1,27 @@
+"use client"
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { HiOutlineChartBar, HiOutlineCollection } from "react-icons/hi";
 import {
-  Book,
-  ChevronLeft,
-  ChevronRight,
-  Copy,
-  CreditCard,
-  File,
   History,
-  Home,
-  LineChart,
-  ListFilter,
-  MoreVertical,
-  Package,
-  Package2,
   PanelLeft,
   Search,
-  Settings,
-  ShoppingCart,
-  Truck,
   User,
-  Users2,
 } from "lucide-react";
-
-import { Badge } from "@/components/ui/badge";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-} from "@/components/ui/pagination";
-import { Progress } from "@/components/ui/progress";
-import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent} from "@/components/ui/tabs";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import RoleRoute from "@/components/RoleRoute";
 import Logo from "@/components/icons/Logo";
 import {
   Select,
@@ -88,8 +33,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import BooksTable from "@/components/ui/BooksTable";
+import { debounce } from "lodash";
 
 export default function LibrarianDashboard() {
+  const [Filter, setFilter] = React.useState("");
+  const [search, setSearch] = React.useState("");
+  const handleSearchChange = debounce((e) => {
+    console.log(e.target.value);
+    setSearch(e.target.value);
+  }, 800);
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-20 flex-col border-r bg-background sm:flex">
@@ -230,6 +182,7 @@ export default function LibrarianDashboard() {
                   type="search"
                   placeholder="Search..."
                   className="w-full rounded-lg bg-background pl-8 md:w-full lg:w-full "
+                  onChange={handleSearchChange}
                 />
               </div>
             </div>
@@ -237,7 +190,9 @@ export default function LibrarianDashboard() {
               <div className="text-slate-800 font-semibold mb-2">
                 Filter books
               </div>
-              <Select>
+              <Select  onValueChange={(value) => (
+                  console.log(value), setFilter(value)
+                )}>
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Filter by " />
                 </SelectTrigger>
@@ -267,7 +222,7 @@ export default function LibrarianDashboard() {
                   className="overflow-y-scroll h-[500px]"
                 >
                   <CardContent className="mt-10 ">
-                    <BooksTable role="librarian" />
+                    <BooksTable role="librarian" searchValue={search} filter={Filter}/>
                   </CardContent>
                 </Card>
               </TabsContent>

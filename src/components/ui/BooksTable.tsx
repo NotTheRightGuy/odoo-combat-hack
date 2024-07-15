@@ -15,17 +15,17 @@ import { redirect } from "next/navigation";
 import { Books } from "@/types/index";
 import { useRouter } from "next/navigation";
 
-function BooksTable({role}: {role: string}) {
+function BooksTable({role,searchValue = "",filter = "title"}: {role: string,searchValue: string,filter: string}) {
   const [books, setBooks] = useState<Books[]>();
   useEffect(() => {
-    fetch("/api/books/")
+    fetch(`/api/books/?${filter}=${searchValue}`)
       .then((response) => response.json())
       .then((data) => {
         setBooks(data);
         console.log(data);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [searchValue, filter]);
   const router = useRouter();
   const path = role === "admin" ? "/admin/book/" : "/librarian/book/";
   return (

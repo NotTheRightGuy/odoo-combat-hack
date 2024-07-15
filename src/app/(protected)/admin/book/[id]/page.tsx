@@ -30,7 +30,7 @@ import { Books } from "@/types/index";
 import { Button } from "@/components/ui/button";
 import UserBookDetail from "@/components/user/book";
 
-export default function BookDetails({ params }: { params: { isbn: number } }) {
+export default function BookDetails({ params }: { params: { id: number } }) {
     const [book, setBook] = React.useState<Books>();
     // const [crimeHistory,setCrimeHistory]=useState<any[]>([])
     // const [temp, setTemp] = useState<any[]>([]);
@@ -47,7 +47,7 @@ export default function BookDetails({ params }: { params: { isbn: number } }) {
 
     useEffect(() => {
         // fetch("http://localhost:3000/api/books/search")
-        fetch("http://localhost:3000/api/books?isbn=" + params.isbn)
+        fetch("http://localhost:3000/api/books?id=" + params.id)
             .then((res) => res.json())
             .then((data) => {
                 setBook(data[0])
@@ -57,6 +57,21 @@ export default function BookDetails({ params }: { params: { isbn: number } }) {
             })
             .catch((err) => console.error(err));
     }, [params.isbn]);
+
+    const lendABook = (id: number) => {
+        fetch("http://localhost:3000/api/books/lend/" + id, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data)
+            })
+            .catch((err) => console.error(err));
+    }
 
 
     return (
@@ -181,7 +196,9 @@ export default function BookDetails({ params }: { params: { isbn: number } }) {
                     </div>
                     <div className="flex flex-col justify-between">
                         <Button className="bg-green-100 text-green-700"> Available </Button>
-                        <Button> Lend Book </Button>
+                        <Button
+
+                        > Lend Book </Button>
                     </div>
                 </div>
                 <div>

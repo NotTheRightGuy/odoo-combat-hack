@@ -1,79 +1,25 @@
+"use client"
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import {
-  HiArrowRight,
-  HiOutlineChartBar,
-  HiOutlineChevronRight,
   HiOutlineCollection,
 } from "react-icons/hi";
 import {
-  ChevronLeft,
-  ChevronRight,
-  Copy,
-  CreditCard,
-  File,
   History,
-  Home,
-  LineChart,
-  ListFilter,
-  MoreVertical,
-  Package,
-  Package2,
   PanelLeft,
   Search,
-  Settings,
-  ShoppingCart,
-  Truck,
   User,
-  Users2,
 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import { Input } from "@/components/ui/input";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-} from "@/components/ui/pagination";
-import { Progress } from "@/components/ui/progress";
-import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 import {
   Tooltip,
   TooltipContent,
@@ -91,10 +37,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import BooksTable from "@/components/ui/BooksTable";
 import UserBooksTable from "@/components/ui/UserBooksTable";
+import { debounce } from "lodash";
 
 function UserDashboard() {
+  const [Filter, setFilter] = React.useState("");
+  const [search, setSearch] = React.useState("");
+  const handleSearchChange = debounce((e) => {
+    console.log(e.target.value);
+    setSearch(e.target.value);
+  }, 800);
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-20 flex-col border-r bg-background sm:flex">
@@ -210,6 +162,7 @@ function UserDashboard() {
                   type="search"
                   placeholder="Search..."
                   className="w-full rounded-lg bg-background pl-8 md:w-full lg:w-full "
+                  onChange={handleSearchChange}
                 />
               </div>
             </div>
@@ -217,7 +170,9 @@ function UserDashboard() {
               <div className="text-slate-800 font-medium text-sm mb-2">
                 Filter books
               </div>
-              <Select>
+              <Select onValueChange={(value) => (
+                  console.log(value), setFilter(value)
+                )}>
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Filter by " />
                 </SelectTrigger>
@@ -244,7 +199,7 @@ function UserDashboard() {
               <TabsContent value="week">
                 <Card x-chunk="dashboard-05-chunk-3">
                   <CardContent className="mt-10 overflow-y-scroll">
-                    <UserBooksTable />
+                    <UserBooksTable searchValue={search} filter={Filter} />
                   </CardContent>
                 </Card>
               </TabsContent>
